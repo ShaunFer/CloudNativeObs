@@ -1,0 +1,44 @@
+# TODO: Configure OTel Collector
+# https://opentelemetry.io/docs/collector/configuration/
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+  zpages:
+    # view /debug/tracez
+    endpoint: 0.0.0.0:55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+exporters:
+  debug:
+    # basic, normal, detailed
+    verbosity: detailed
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+  otlp/tempo:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+
+processors:
+  batch: 
+  memory_limiter:
+    limit_mib: 2048
+    spike_limit_mib: 512
+    check_interval: 5s
+
+service:
+  extensions: [ health_check, zpages ]
+  pipelines:
+    traces:
+      receivers: [ otlp ]
+      processors: [ memory_limiter, batch ]
+      exporters: [ debug, otlp/tempo, otlp/jaeger ]
