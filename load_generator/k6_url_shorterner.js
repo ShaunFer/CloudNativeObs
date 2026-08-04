@@ -6,7 +6,7 @@ import { randomIntBetween } from 'https://jslib.k6.io/k6-utils/1.4.0/index.js'
 
 const API_SHORTEN = 'api/shorten'
 const SHORTERNER_URL = __ENV.SHORTERNER_URL || 'http://localhost:5000'
-const LOAD_DURATION = __ENV.LOAD_DURATION || '3m'
+const LOAD_DURATION = __ENV.LOAD_DURATION || '5m'
 const MAX_SLEEP = parseInt(__ENV.MAX_SLEEP) || 5
 const VUS_COUNT = parseInt(__ENV.VUS_COUNT) || 1
 const ERROR_RATE = parseFloat(__ENV.ERROR_RATE) || 0.3
