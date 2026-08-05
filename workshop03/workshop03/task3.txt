@@ -1,0 +1,7 @@
+1. sum(k6_http_reqs_total) by (scenario)
+2. sum(http_server_duration_count)by(http_route)
+3. (sum(cache_count_total{hit="true"}) by (cloud_region)/sum(cache_count_total) by (cloud_region))*100
+4. sum(rate(cache_count_total[1m])) by (hit)
+5. histogram_quantile(0.9, sum(rate(http_server_duration_milloseconds_bucket[1m])) by (le))
+6. avg(rate(k6_http_req_duration_milliseconds_sum / k6_http_req_duration_milliseconds_count[5m])) by(service_name)-
+avg(rate(http_server_duration_milliseconds_sum{http_route="/"} / http_server_duration_milliseconds_count{http_route="/"}[5m]))
