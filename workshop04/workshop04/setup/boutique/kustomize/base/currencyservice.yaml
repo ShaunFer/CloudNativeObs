@@ -20,6 +20,8 @@ metadata:
     app: currencyservice
   annotations:
     instrumentation.opentelemetry.io/inject-nodejs: 'true'
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9464'
   image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:latest
 
 spec:

@@ -27,4 +27,8 @@ spec:
   nodejs:
     env:
     - name: OTEL_METRICS_EXPORTER
-      value: none
+      value: prometheus
+    - name: OTEL_EXPORTER_PROMETHEUS_HOST
+      value: 0.0.0.0
+    - name: OTEL_EXPORTER_PROMETHEUS_PORT
+      value: "9464"
